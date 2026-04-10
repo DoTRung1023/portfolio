@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Darius Nguyen</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html"><div class="logo-badge">DN</div>Darius Nguyen</a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="photos.html">Photos</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <div class="nav-pill"><div class="pill-dot"></div>Available</div>
+</nav>
+
+<div class="page-shell">
+  <div class="page-banner">
+    <div class="banner-fade"></div>
+    <div class="banner-ghost">06</div>
+    <div class="banner-content">
+      <div class="eyebrow anim">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Selected Work</span>
+      </div>
+      <div class="banner-title anim d1">
+        Projects &amp;<br><span class="italic">Builds</span>
+      </div>
+      <p class="banner-sub anim d2">Things I've shipped — spanning full-stack apps, AI systems, and research tools.</p>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="item-list">
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">AI Research</span><span class="item-date">Jan 2025</span></div>
+        <div class="item-title">LLM Research Assistant</div>
+        <p class="item-desc">AI-powered system integrating large language models with structured knowledge retrieval for academic research workflows. FastAPI backend, React frontend, LangChain orchestration.</p>
+        <div class="item-achs">
+          <div class="item-ach">Reduced manual literature review time by ~60% in user testing</div>
+          <div class="item-ach">Supports multi-document RAG over 10,000+ academic papers</div>
+          <div class="item-ach">Deployed as a web app with real-time streaming responses</div>
+        </div>
+        <div class="item-tags"><span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">PostgreSQL</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">Robotics</span><span class="item-date">Oct 2024</span></div>
+        <div class="item-title">Robotic Vision Pipeline</div>
+        <p class="item-desc">Real-time object detection and depth estimation for autonomous navigation. YOLOv8 integrated with a ROS2 navigation stack on a TurtleBot3 platform.</p>
+        <div class="item-achs">
+          <div class="item-ach">94% detection accuracy in cluttered environments</div>
+          <div class="item-ach">Runs at 30fps on NVIDIA Jetson Nano edge hardware</div>
+          <div class="item-ach">Seamless simulation-to-real transfer with Gazebo</div>
+        </div>
+        <div class="item-tags"><span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">ROS2</span><span class="tag">C++</span><span class="tag">Python</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">Algorithms</span><span class="item-date">Jul 2024</span></div>
+        <div class="item-title">Evolutionary Optimizer</div>
+        <p class="item-desc">Benchmarking suite for evolutionary computation strategies — genetic algorithms, particle swarm, and differential evolution across standard combinatorial problems.</p>
+        <div class="item-achs">
+          <div class="item-ach">6 algorithms benchmarked across 12 standard problem sets</div>
+          <div class="item-ach">Visualisation dashboard for convergence and diversity metrics</div>
+        </div>
+        <div class="item-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Streamlit</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">Full Stack</span><span class="item-date">Apr 2024</span></div>
+        <div class="item-title">Dev Portfolio Platform</div>
+        <p class="item-desc">Full-stack platform for developers with interactive visualisations, CMS-powered blog, and project dashboard. Next.js App Router with ISR and a GraphQL API.</p>
+        <div class="item-achs">
+          <div class="item-ach">Server-side rendered with Next.js App Router and ISR</div>
+          <div class="item-ach">GraphQL API with real-time subscriptions via WebSockets</div>
+        </div>
+        <div class="item-tags"><span class="tag">Next.js</span><span class="tag">GraphQL</span><span class="tag">PostgreSQL</span><span class="tag">TypeScript</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">Collab Tools</span><span class="item-date">Dec 2023</span></div>
+        <div class="item-title">Real-time Collab Editor</div>
+        <p class="item-desc">Multiplayer document editing with operational transforms, live cursors, presence indicators, and offline-first sync. Inspired by Figma and Notion's collaboration layers.</p>
+        <div class="item-achs">
+          <div class="item-ach">Up to 20 concurrent editors with sub-100ms latency</div>
+          <div class="item-ach">Offline-first via service workers and CRDTs</div>
+        </div>
+        <div class="item-tags"><span class="tag">React</span><span class="tag">Socket.io</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+      <div class="item-card">
+        <div class="item-meta"><span class="item-cat">EdTech</span><span class="item-date">Aug 2023</span></div>
+        <div class="item-title">Adaptive Learning System</div>
+        <p class="item-desc">Personalised learning path generator using knowledge graph traversal and spaced repetition. Adapts content delivery based on learner performance and forgetting curves.</p>
+        <div class="item-achs">
+          <div class="item-ach">2,000+ node knowledge graph modelling CS concepts</div>
+          <div class="item-ach">25% retention improvement vs static format in A/B test</div>
+        </div>
+        <div class="item-tags"><span class="tag">TypeScript</span><span class="tag">Neo4j</span><span class="tag">Express</span><span class="tag">React</span></div>
+        <a href="#" class="item-link">View Project →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer><span class="f-copy">© 2025 Darius Nguyen</span><span class="f-copy" id="clock"></span></footer>
+<script src="app.js"></script>
+</body>
+</html>
