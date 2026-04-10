@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -8,6 +9,9 @@ const app = express();
 const ROOT_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 const FACTS_PATH = path.join(PUBLIC_DIR, 'data', 'facts.json');
+
+const FACTS_SNAPSHOT_URL = new URL('../public/data/facts.json', import.meta.url);
+const factsSnapshot = JSON.parse(readFileSync(FACTS_SNAPSHOT_URL, 'utf8'));
 
 const PORT = process.env.PORT || 3000;
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
@@ -22,8 +26,9 @@ async function fetchJson(url, init) {
 async function fetchLeetCodeSolved(username) {
   if (!username) return null;
 
-  const url = 'https://leetcode.com/graphql';
-  const query = `
+  try {
+    const url = 'https://leetcode.com/graphql';
+    const query = `
     query userProfile($username: String!) {
       matchedUser(username: $username) {
         submissionCalendar
@@ -37,19 +42,23 @@ async function fetchLeetCodeSolved(username) {
     }
   `;
 
-  const data = await fetchJson(url, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ query, variables: { username } })
-  });
+    const data = await fetchJson(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ query, variables: { username } })
+    });
 
-  const matchedUser = data?.data?.matchedUser;
-  const nums = matchedUser?.submitStatsGlobal?.acSubmissionNum ?? [];
-  const total = nums.find(x => x?.difficulty === 'All')?.count;
-  const solved = typeof total === 'number' ? total : null;
+    const matchedUser = data?.data?.matchedUser;
+    const nums = matchedUser?.submitStatsGlobal?.acSubmissionNum ?? [];
+    const total = nums.find(x => x?.difficulty === 'All')?.count;
+    const solved = typeof total === 'number' ? total : null;
 
-  const streak = computeLeetCodeDailyStreak(matchedUser?.submissionCalendar);
-  return { solved, streak };
+    const streak = computeLeetCodeDailyStreak(matchedUser?.submissionCalendar);
+    return { solved, streak };
+  } catch {
+    // LeetCode often blocks or throttles serverless/datacenter IPs (e.g. on Vercel).
+    return null;
+  }
 }
 
 function utcMidnightSeconds(date = new Date()) {
@@ -96,16 +105,23 @@ async function fetchDuolingoStreak(username) {
 
 app.get('/api/facts', async (_req, res) => {
   try {
-    const [leetcode, duolingoStreak, fileFacts] = await Promise.all([
+    let fileFacts = { ...factsSnapshot };
+    try {
+      const raw = await fs.readFile(FACTS_PATH, 'utf8');
+      fileFacts = { ...factsSnapshot, ...JSON.parse(raw) };
+    } catch {
+      // On Vercel the function bundle may not have `public/` on disk; imported snapshot still works.
+    }
+
+    const [leetcode, duolingoStreak] = await Promise.all([
       fetchLeetCodeSolved(LEETCODE_USERNAME),
-      fetchDuolingoStreak(DUOLINGO_USERNAME),
-      fs.readFile(FACTS_PATH, 'utf8').then(t => JSON.parse(t)).catch(() => ({}))
+      fetchDuolingoStreak(DUOLINGO_USERNAME)
     ]);
 
     res.json({
       duolingoStreak: duolingoStreak ?? fileFacts.duolingoStreak ?? '-',
-      leetcodeDailyStreak: leetcode?.streak ?? '-',
-      leetcodeSolved: leetcode?.solved ?? '-',
+      leetcodeDailyStreak: leetcode?.streak ?? fileFacts.leetcodeDailyStreak ?? '-',
+      leetcodeSolved: leetcode?.solved ?? fileFacts.leetcodeSolved ?? '-',
       updatedAt: new Date().toISOString()
     });
   } catch (err) {
