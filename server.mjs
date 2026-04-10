@@ -1,12 +1,17 @@
 import express from 'express';
 import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const app = express();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PUBLIC_DIR = path.join(__dirname, 'public');
 
 const PORT = process.env.PORT || 3000;
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
 const DUOLINGO_USERNAME = process.env.DUOLINGO_USERNAME || '';
-const FACTS_PATH = new URL('./facts.json', import.meta.url);
+const FACTS_PATH = new URL('./public/facts.json', import.meta.url);
 
 async function fetchJson(url, init) {
   const res = await fetch(url, init);
@@ -116,9 +121,21 @@ app.get('/api/facts', async (_req, res) => {
   }
 });
 
-app.use(express.static('.', { extensions: ['html'] }));
+app.get('/', (_req, res) => {
+  // On Vercel, `public/` is on the CDN only; sendFile may not resolve. Rewrite in
+  // vercel.json also maps `/` → `/index.html`; this covers the function path.
+  if (process.env.VERCEL) {
+    res.redirect(302, '/index.html');
+    return;
+  }
+  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+});
+
+app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+export default app;
 
