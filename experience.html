@@ -3,113 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experience — Darius Nguyen</title>
+<title>DoTRung</title>
 <link rel="icon" type="image/png" href="logo.png">
-<link rel="shortcut icon" type="image/png" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self';">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="pitch-bg"></div>
 
 <nav>
-  <a class="logo" href="index.html"><div class="logo-badge">DN</div>Darius Nguyen</a>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-badge">DTR</div>
+    HAI TRUNG DO
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">About</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="experience.html" class="active">Experience</a></li>
-    <li><a href="photos.html">Photos</a></li>
+    <li><a class="active" href="experience.html">Experience</a></li>
     <li><a href="blog.html">Blog</a></li>
   </ul>
-  <div class="nav-pill"><div class="pill-dot"></div>Available</div>
+  <div class="nav-available">Available</div>
 </nav>
 
-<div class="page-shell">
-  <div class="page-banner">
-    <div class="banner-fade"></div>
-    <div class="banner-ghost">03</div>
-    <div class="banner-content">
-      <div class="eyebrow anim">
-        <div class="eyebrow-line"></div>
-        <span class="eyebrow-text">Career</span>
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career Track</div>
+    <h2 class="section-title">EXPERIENCE</h2>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <p class="exp-type">🎓 Education</p>
+        <h3 class="exp-org">University of Adelaide</h3>
+        <p class="exp-role">Bachelor of Computer Science</p>
+        <p class="exp-date">Feb 2024 – Dec 2026 (Expected) · Adelaide, SA</p>
+        <ul class="exp-details">
+          <li>Pursuing a Computer Science degree with focus on systems, algorithms, and software engineering</li>
+          <li>Active member of Adelaide University Competitive Programming Club (ACPC) — AUCPL Division A competitor</li>
+          <li>Participant in RAVI Study Program (RSP) — strengthening data structures, algorithms, and mock interview skills</li>
+        </ul>
+        <span class="exp-gpa">GPA: 6.9 / 7.0 · WAM: 92.50%</span>
       </div>
-      <div class="banner-title anim d1">
-        My<br><span class="italic">Experience</span>
+
+      <div class="exp-card reveal">
+        <p class="exp-type">💼 Internship</p>
+        <h3 class="exp-org">University of Adelaide</h3>
+        <p class="exp-role">Summer Research Intern · Supervised by Dr Feras Dayoub</p>
+        <p class="exp-date">Dec 2025 – Feb 2026 · Adelaide, SA</p>
+        <ul class="exp-details">
+          <li>Developed reusable simulation test-bed using ROS2, Gazebo & TurtleBot3 for multi-robot coordination research</li>
+          <li>Built web interface with ROSBridge & WebSocket for real-time mission planning and robot control</li>
+          <li>Created baseline greedy task allocator comparing robot-only, human-only, and mixed-team performance metrics</li>
+          <li>Stack: Python, ROS2, Gazebo, FastAPI, Docker, MySQL, MongoDB, Ubuntu</li>
+        </ul>
       </div>
-      <p class="banner-sub anim d2">My professional journey and accomplishments.</p>
     </div>
   </div>
+</section>
 
-  <div class="content-wrap">
+<footer>
+  <p>© 2026 <span>Hai Trung Do</span> — Built with caffeine & curiosity</p>
+  <p>Adelaide, SA · <span>Available for work</span></p>
+</footer>
 
-    <div class="s-eyebrow anim"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">Work</span></div>
-    <div class="s-heading anim d1" style="margin-bottom:2rem">Professional <span class="dim">History</span></div>
-
-    <div class="item-list">
-
-      <div class="item-card">
-        <div class="item-meta"><span class="item-cat">Research</span><span class="item-date">Nov 2025 – Present</span></div>
-        <div class="item-title">Summer Research Student</div>
-        <div class="item-org">Australian Institute for Machine Learning (AIML)</div>
-        <div class="item-summary">ROS 2 simulation-to-real robotics research platform and web control system.</div>
-        <div class="item-achs">
-          <div class="item-ach">Designed and deployed a ROS 2–based simulation-to-real robotic research platform for human–robot search-and-delivery tasks, enabling seamless transfer of policies between Gazebo simulation and real-world deployment on TurtleBot3 Waffle.</div>
-          <div class="item-ach">Architected a modular ROS 2 node ecosystem covering perception, navigation, task planning, and execution, with clearly defined interfaces to support rapid experimentation and extensibility.</div>
-          <div class="item-ach">Developed a real-time web-based robot control and monitoring system using WebSocket (Node.js), enabling teleoperation, live state visualisation, and dynamic task allocation through an intuitive browser interface.</div>
-        </div>
-        <div class="item-tags"><span class="tag">ROS2</span><span class="tag">Python</span><span class="tag">Node.js</span><span class="tag">WebSocket</span><span class="tag">Gazebo</span></div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-meta"><span class="item-cat">Research</span><span class="item-date">Jun 2025 – Jan 2026</span></div>
-        <div class="item-title">Student Researcher</div>
-        <div class="item-org">Australian Institute for Machine Learning (AIML)</div>
-        <div class="item-summary">AI-driven materials discovery and graph neural network modelling.</div>
-        <div class="item-achs">
-          <div class="item-ach">Built an AI-driven materials discovery pipeline converting chemical representations (SMILES) into molecular graph structures, enabling data-driven modelling of polymers and catalysts for green hydrogen applications.</div>
-          <div class="item-ach">Designed and trained attention-based Graph Neural Networks (GNNs) to predict key material properties, leveraging graph-level message passing to capture complex chemical interactions.</div>
-          <div class="item-ach">Improved prediction efficiency and accuracy by up to 30% through multi-task learning, uncertainty-weighted loss optimisation, and external data augmentation under compute-constrained settings.</div>
-        </div>
-        <div class="item-tags"><span class="tag">PyTorch</span><span class="tag">GNN</span><span class="tag">Python</span><span class="tag">Graph ML</span><span class="tag">Chemistry AI</span></div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-meta"><span class="item-cat">Industry</span><span class="item-date">Oct 2023 – Jan 2024</span></div>
-        <div class="item-title">Software Engineer Intern</div>
-        <div class="item-org">Budi</div>
-        <div class="item-summary">Frontend team leadership, agile delivery, and cross-functional collaboration.</div>
-        <div class="item-achs">
-          <div class="item-ach">Led a 4-member front-end team to redesign core web application components, improving usability and UI consistency across the platform.</div>
-          <div class="item-ach">Managed project tasks and timelines using Scrum/Agile tools to plan sprints, track progress, and ensure on-time feature delivery.</div>
-          <div class="item-ach">Collaborated cross-functionally to deliver key platform features, contributing to a 30% increase in customers.</div>
-        </div>
-        <div class="item-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Scrum</span><span class="tag">Node.js</span></div>
-      </div>
-
-    </div>
-
-    <div class="section-gap"></div>
-    <div class="s-eyebrow anim"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">Education</span></div>
-    <div class="s-heading anim d1" style="margin-bottom:2rem">Academic <span class="dim">Record</span></div>
-
-    <div class="item-list">
-      <div class="item-card">
-        <div class="item-meta"><span class="item-cat">Degree</span><span class="item-date">2021 – Present</span></div>
-        <div class="item-title">B.Sc Computer Science (Advanced)</div>
-        <div class="item-org">University of Adelaide</div>
-        <div class="item-summary">GPA 6.7 / 7 · Dean's Merit List · Specialisation in AI and Systems.</div>
-        <div class="item-achs">
-          <div class="item-ach">Coursework in machine learning, computer vision, algorithms, distributed systems, and software engineering.</div>
-          <div class="item-ach">Active member of the CS Society and AI research group.</div>
-          <div class="item-ach">Honours-level research project in evolutionary computation.</div>
-        </div>
-        <div class="item-tags"><span class="tag">AI</span><span class="tag">Computer Vision</span><span class="tag">Algorithms</span><span class="tag">Systems</span></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<footer><span class="f-copy">© 2025 Darius Nguyen</span><span class="f-copy" id="clock"></span></footer>
-<script src="app.js"></script>
+<script src="site.js" defer></script>
 </body>
 </html>
+

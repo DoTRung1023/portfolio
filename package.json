@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "update:facts": "node scripts/update-facts.mjs"
+  }
+}
+

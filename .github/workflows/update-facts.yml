@@ -1,0 +1,36 @@
+name: Update facts.json
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */12 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Update facts.json
+        env:
+          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+          DUOLINGO_USERNAME: ${{ secrets.DUOLINGO_USERNAME }}
+        run: npm run update:facts
+
+      - name: Commit and push (if changed)
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git add facts.json
+          git commit -m "chore: update facts.json"
+          git push
+
