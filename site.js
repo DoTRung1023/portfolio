@@ -1,4 +1,6 @@
 (() => {
+  function initHeroRightParallaxBg() {}
+
   function initReveal() {
     const revealEls = document.querySelectorAll('.reveal');
     if (!revealEls.length) return;
