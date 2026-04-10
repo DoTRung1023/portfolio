@@ -1,6 +1,4 @@
 (() => {
-  function initHeroRightParallaxBg() {}
-
   function initReveal() {
     const revealEls = document.querySelectorAll('.reveal');
     if (!revealEls.length) return;
@@ -26,7 +24,7 @@
     try {
       const sources = [
         { url: '/api/facts', init: { cache: 'no-store' } },
-        { url: 'facts.json', init: { cache: 'no-store' } }
+        { url: 'data/facts.json', init: { cache: 'no-store' } }
       ];
 
       let facts = null;

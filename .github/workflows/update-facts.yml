@@ -30,7 +30,7 @@ jobs:
             echo "No changes."
             exit 0
           fi
-          git add public/facts.json
+          git add public/data/facts.json
           git commit -m "chore: update facts.json"
           git push
 

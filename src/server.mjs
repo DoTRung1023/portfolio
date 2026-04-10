@@ -5,13 +5,13 @@ import { fileURLToPath } from 'node:url';
 
 const app = express();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PUBLIC_DIR = path.join(__dirname, 'public');
+const ROOT_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
+const FACTS_PATH = path.join(PUBLIC_DIR, 'data', 'facts.json');
 
 const PORT = process.env.PORT || 3000;
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
 const DUOLINGO_USERNAME = process.env.DUOLINGO_USERNAME || '';
-const FACTS_PATH = new URL('./public/facts.json', import.meta.url);
 
 async function fetchJson(url, init) {
   const res = await fetch(url, init);
@@ -69,7 +69,6 @@ function computeLeetCodeDailyStreak(submissionCalendar) {
   const today = utcMidnightSeconds(new Date());
   const oneDay = 86400;
 
-  // If user hasn't submitted today yet, streak is still "current" based on yesterday.
   const start = cal[String(today)] ? today : today - oneDay;
 
   let streak = 0;
@@ -85,7 +84,6 @@ function computeLeetCodeDailyStreak(submissionCalendar) {
 async function fetchDuolingoStreak(username) {
   if (!username) return null;
 
-  // Unofficial public API (Duome). Not guaranteed for all accounts.
   try {
     const url = `https://www.duome.eu/api/v1/users/${encodeURIComponent(username)}`;
     const data = await fetchJson(url);
@@ -122,8 +120,6 @@ app.get('/api/facts', async (_req, res) => {
 });
 
 app.get('/', (_req, res) => {
-  // On Vercel, `public/` is on the CDN only; sendFile may not resolve. Rewrite in
-  // vercel.json also maps `/` → `/index.html`; this covers the function path.
   if (process.env.VERCEL) {
     res.redirect(302, '/index.html');
     return;
@@ -138,4 +134,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-

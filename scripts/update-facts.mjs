@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-const ROOT_FACTS_PATH = new URL('../public/facts.json', import.meta.url);
+const ROOT_FACTS_PATH = new URL('../public/data/facts.json', import.meta.url);
 
 // Fill these in:
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
