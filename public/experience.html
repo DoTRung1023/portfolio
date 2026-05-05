@@ -31,30 +31,58 @@
     <div class="section-label">Career Track</div>
     <h2 class="section-title">EXPERIENCE</h2>
     <div class="exp-grid">
-      <div class="exp-card reveal">
-        <p class="exp-type">🎓 Education</p>
-        <h3 class="exp-org">University of Adelaide</h3>
-        <p class="exp-role">Bachelor of Computer Science</p>
-        <p class="exp-date">Feb 2024 – Dec 2026 (Expected) · Adelaide, SA</p>
-        <ul class="exp-details">
-          <li>Pursuing a Computer Science degree with focus on systems, algorithms, and software engineering</li>
-          <li>Active member of Adelaide University Competitive Programming Club (ACPC) — AUCPL Division A competitor</li>
-          <li>Participant in RAVI Study Program (RSP) — strengthening data structures, algorithms, and mock interview skills</li>
-        </ul>
-        <span class="exp-gpa">GPA: 6.9 / 7.0 · WAM: 92.50%</span>
-      </div>
+      <!-- Timeline: latest -> oldest -->
+      <div class="timeline reveal">
+        <div class="timeline-line" aria-hidden="true"></div>
 
-      <div class="exp-card reveal">
-        <p class="exp-type">💼 Internship</p>
-        <h3 class="exp-org">University of Adelaide</h3>
-        <p class="exp-role">Summer Research Intern · Supervised by Dr Feras Dayoub</p>
-        <p class="exp-date">Dec 2025 – Feb 2026 · Adelaide, SA</p>
-        <ul class="exp-details">
-          <li>Developed reusable simulation test-bed using ROS2, Gazebo &amp; TurtleBot3 for multi-robot coordination research</li>
-          <li>Built web interface with ROSBridge &amp; WebSocket for real-time mission planning and robot control</li>
-          <li>Created baseline greedy task allocator comparing robot-only, human-only, and mixed-team performance metrics</li>
-          <li>Stack: Python, ROS2, Gazebo, FastAPI, Docker, MySQL, MongoDB, Ubuntu</li>
-        </ul>
+        <div class="timeline-item">
+          <div class="timeline-marker" aria-hidden="true">
+            <svg class="timeline-marker-icon" viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="M3.5 8.5h17a1.5 1.5 0 0 1 1.5 1.5v7a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17v-7a1.5 1.5 0 0 1 1.5-1.5Z" />
+              <path d="M8.5 8.5V7A2.5 2.5 0 0 1 11 4.5h2A2.5 2.5 0 0 1 15.5 7v1.5" />
+              <path d="M2 12.5h7" />
+              <path d="M15 12.5h7" />
+              <path d="M9 11.25h6v2.5H9z" />
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <p class="exp-type">Internship</p>
+            <h3 class="exp-org">University of Adelaide</h3>
+            <p class="exp-role">Summer Research Intern · Supervised by Dr Feras Dayoub</p>
+            <div class="card-meta">
+              <svg class="meta-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 10h5v5H7z" opacity="0.0"></path><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM5 20V9h14v11H5zM7 11h5v5H7z"></path></svg>
+              <span class="exp-date">Dec 2025 – Feb 2026 · Adelaide, SA</span>
+            </div>
+            <h4 class="exp-sub">Key achievements:</h4>
+            <ul class="exp-details">
+              <li>Built ROS2/Gazebo simulation test-bed and TurtleBot3 integration for multi-robot research</li>
+              <li>Implemented ROSBridge/WebSocket web interface for real-time mission planning and teleoperation</li>
+              <li>Designed baseline greedy task allocator and evaluated mixed human-robot team performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker" aria-hidden="true">
+            <svg class="timeline-marker-icon" viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="M2.5 9.5 12 5l9.5 4.5L12 14 2.5 9.5Z" />
+              <path d="M6.5 11.4V15c0 1.6 2.4 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-3.6" />
+              <path d="M21.5 10v5.8" />
+              <circle cx="21.5" cy="16.9" r="1.1" />
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <p class="exp-type">Education</p>
+            <h3 class="exp-org">University of Adelaide</h3>
+            <p class="exp-role">Bachelor of Computer Science</p>
+            <div class="card-meta">
+              <svg class="meta-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 10h5v5H7z" opacity="0.0"></path><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM5 20V9h14v11H5zM7 11h5v5H7z"></path></svg>
+              <span class="exp-date">Feb 2024 – Dec 2026 (Expected) · Adelaide, SA</span>
+            </div>
+            <p class="exp-blurb">Pursuing a Computer Science degree with a focus on systems, algorithms, and software engineering. Active in ACPC and RAVI study programs.</p>
+            <span class="exp-gpa">GPA: 6.9 / 7.0 · WAM: 92.50%</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
