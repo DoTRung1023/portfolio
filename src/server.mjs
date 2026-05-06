@@ -122,6 +122,9 @@ app.get('/api/facts', async (_req, res) => {
       duolingoStreak: duolingoStreak ?? fileFacts.duolingoStreak ?? '-',
       leetcodeDailyStreak: leetcode?.streak ?? fileFacts.leetcodeDailyStreak ?? '-',
       leetcodeSolved: leetcode?.solved ?? fileFacts.leetcodeSolved ?? '-',
+      leetcodeEasy: fileFacts.leetcodeEasy ?? '-',
+      leetcodeMedium: fileFacts.leetcodeMedium ?? '-',
+      leetcodeHard: fileFacts.leetcodeHard ?? '-',
       updatedAt: new Date().toISOString()
     });
   } catch (err) {
@@ -129,6 +132,9 @@ app.get('/api/facts', async (_req, res) => {
       duolingoStreak: '-',
       leetcodeDailyStreak: '-',
       leetcodeSolved: '-',
+      leetcodeEasy: '-',
+      leetcodeMedium: '-',
+      leetcodeHard: '-',
       updatedAt: new Date().toISOString(),
       error: err instanceof Error ? err.message : String(err)
     });

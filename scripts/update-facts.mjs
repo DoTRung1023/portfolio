@@ -1,10 +1,12 @@
 import fs from 'node:fs/promises';
+import { config } from 'dotenv';
+
+config({ debug: false });
 
 const ROOT_FACTS_PATH = new URL('../public/data/facts.json', import.meta.url);
 
 // Fill these in:
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
-const DUOLINGO_USERNAME = process.env.DUOLINGO_USERNAME || '';
 
 async function fetchJson(url, init) {
   const res = await fetch(url, init);
@@ -40,10 +42,16 @@ async function fetchLeetCodeStats(username) {
   const matchedUser = data?.data?.matchedUser;
   const nums = matchedUser?.submitStatsGlobal?.acSubmissionNum ?? [];
   const total = nums.find(x => x?.difficulty === 'All')?.count;
+  const easy = nums.find(x => x?.difficulty === 'Easy')?.count;
+  const medium = nums.find(x => x?.difficulty === 'Medium')?.count;
+  const hard = nums.find(x => x?.difficulty === 'Hard')?.count;
 
   const leetcodeDailyStreak = computeLeetCodeDailyStreak(matchedUser?.submissionCalendar);
   return {
     leetcodeSolved: typeof total === 'number' ? total : null,
+    leetcodeEasy: typeof easy === 'number' ? easy : null,
+    leetcodeMedium: typeof medium === 'number' ? medium : null,
+    leetcodeHard: typeof hard === 'number' ? hard : null,
     leetcodeDailyStreak
   };
 }
@@ -76,23 +84,18 @@ function computeLeetCodeDailyStreak(submissionCalendar) {
   return streak;
 }
 
-async function fetchDuolingoStats(username) {
-  if (!username) return {};
-
-  // No official public Duolingo API. Duome provides a public stats API for many users.
-  // Docs/behavior can vary; we fail gracefully.
-  try {
-    const url = `https://www.duome.eu/api/v1/users/${encodeURIComponent(username)}`;
-    const data = await fetchJson(url);
-
-    // duome fields commonly include "streak" (days)
-    const streak = data?.streak;
-    return {
-      duolingoStreak: typeof streak === 'number' ? streak : null
-    };
-  } catch {
-    return {};
-  }
+function calculateDuolingoStreak() {
+  // Calculate days since November 22, 2023
+  const startDate = new Date('2023-11-22');
+  const today = new Date();
+  
+  // Calculate difference in milliseconds and convert to days
+  const diffMs = today - startDate;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  
+  return {
+    duolingoStreak: diffDays
+  };
 }
 
 async function main() {
@@ -103,16 +106,16 @@ async function main() {
     existingFacts = {};
   }
 
-  const [leetcode, duolingo] = await Promise.all([
-    fetchLeetCodeStats(LEETCODE_USERNAME),
-    fetchDuolingoStats(DUOLINGO_USERNAME)
-  ]);
+  const leetcode = await fetchLeetCodeStats(LEETCODE_USERNAME);
+  const duolingo = calculateDuolingoStreak();
 
   const facts = {
-    // Keep manual value if duolingo fetch fails/unavailable
-    duolingoStreak: duolingo.duolingoStreak ?? existingFacts.duolingoStreak ?? '-',
+    duolingoStreak: `${duolingo.duolingoStreak} days`,
     leetcodeDailyStreak: leetcode.leetcodeDailyStreak ?? '-',
     leetcodeSolved: leetcode.leetcodeSolved ?? '-',
+    leetcodeEasy: leetcode.leetcodeEasy ?? '-',
+    leetcodeMedium: leetcode.leetcodeMedium ?? '-',
+    leetcodeHard: leetcode.leetcodeHard ?? '-',
     updatedAt: new Date().toISOString()
   };
 
