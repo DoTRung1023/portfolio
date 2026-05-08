@@ -17,7 +17,7 @@
       HAI TRUNG DO (Dorian)
     </div>
     <ul class="nav-links">
-      <li><a href="index.html">About</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a class="active" href="experience.html">Experience</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="blog.html">Blogs</a></li>
@@ -46,6 +46,7 @@
             </svg>
           </div>
           <div class="card-meta">
+            <svg class="meta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span class="card-meta-text">
               <span class="exp-date">Dec 2025 – Feb 2026</span>
             </span>
@@ -53,13 +54,15 @@
           <div class="timeline-content">
             <span class="timeline-location">Adelaide, SA, Australia</span>
             <p class="exp-type">Internship</p>
-            <h3 class="exp-org">University of Adelaide</h3>
+            <h3 class="exp-org">Australian Institute for Machine Learning (AIML)</h3>
             <p class="exp-role">Summer Research Intern · Supervised by Dr Feras Dayoub</p>
-            <h4 class="exp-sub">Key achievements:</h4>
+            <a href="projects.html#internship" class="exp-project exp-project-link">Project: Dynamic Task Allocation Test-Bed for Human-Robot Search-and-Deliver Teams ↗</a>
+            <h4 class="exp-sub">Key Achievements</h4>
             <ul class="exp-details">
-              <li>Built ROS2/Gazebo simulation test-bed and TurtleBot3 integration for multi-robot research</li>
-              <li>Implemented ROSBridge/WebSocket web interface for real-time mission planning and teleoperation</li>
-              <li>Designed baseline greedy task allocator and evaluated mixed human-robot team performance</li>
+              <li>Built a reusable ROS2/Gazebo simulation test-bed with TurtleBot3 integration, enabling reproducible multi-robot experiments across robot-only, human-only, and mixed-team configurations</li>
+              <li>Developed a ROSBridge/WebSocket web interface for real-time mission planning, task oversight, and teleoperation by a human operator</li>
+              <li>Designed a baseline greedy task allocator and benchmarked performance metrics across team configurations to evaluate human-robot collaboration efficiency</li>
+              <li>Instrumented the system with performance logging to capture and compare key metrics across all task allocation scenarios</li>
             </ul>
           </div>
         </div>
@@ -74,6 +77,7 @@
             </svg>
           </div>
           <div class="card-meta">
+            <svg class="meta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span class="card-meta-text">
               <span class="exp-date">Feb 2024 – Dec 2026</span>
             </span>
@@ -83,8 +87,35 @@
             <p class="exp-type">Education</p>
             <h3 class="exp-org">University of Adelaide</h3>
             <p class="exp-role">Bachelor of Computer Science</p>
-            <p class="exp-blurb">Pursuing a Computer Science degree with a focus on systems, algorithms, and software engineering. Active in ACPC and RAVI study programs.</p>
-            <span class="exp-gpa">GPA: 6.9 / 7.0 · WAM: 92.50%</span>
+            <p class="exp-blurb">Pursuing a Computer Science degree with a passion for building practical solutions across systems, algorithms, and software engineering. Driven by curiosity in AI and robotics research, and a strong commitment to continuous growth through competitive programming and self-directed learning.</p>
+              <div class="exp-subjects">
+                <div class="exp-section-title">Relevant Subjects</div>
+                <div class="bubble-list">
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Algorithms &amp; Data Structures</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Systems Programming</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Operating Systems</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Web &amp; Database Development</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">AI</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Data Analytics</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Data Science</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Software Engineering</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Computer Systems</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Programming</abbr></span>
+                </div>
+              </div>
+              <div class="exp-extracurricular">
+                <div class="exp-section-title">Extracurricular</div>
+                <div class="bubble-list">
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">Adelaide University Competitive Programming Club (ACPC)</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">AUCPL Division A</abbr></span>
+                  <span class="bubble bubble-sm"><abbr class="hud-abbr">RAVI Study Program (RSP)</abbr></span>
+                </div>
+              </div>
+            <div class="exp-footer">
+              <span class="exp-gpa">GPA: 6.9 / 7.0 · WAM: 92.50%</span>
+              <a href="projects.html#bachelor" class="exp-projects">5 Projects</a>
+              <a href="documents/transcript-2025.pdf" target="_blank" rel="noreferrer" class="exp-projects">View Transcript</a>
+            </div>
           </div>
         </div>
       </div>
@@ -93,6 +124,10 @@
 </section>
 
 <script src="js/site.js" defer></script>
+<footer>
+  <p>© 2026 <span>Hai Trung Do (Dorian)</span></p>
+  <p>Open to work — <a href="mailto:nolimitrung@gmail.com">Let's connect</a></p>
+</footer>
 </body>
 </html>
 

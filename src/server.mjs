@@ -143,10 +143,10 @@ app.get('/api/facts', async (_req, res) => {
 
 app.get('/', (_req, res) => {
   if (process.env.VERCEL) {
-    res.redirect(302, '/index.html');
+    res.redirect(302, '/about.html');
     return;
   }
-  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+  res.sendFile(path.join(PUBLIC_DIR, 'about.html'));
 });
 
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
