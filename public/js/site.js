@@ -54,14 +54,36 @@
     }
   }
 
+  function initMobileMenu() {
+    const btn = document.querySelector('.nav-hamburger');
+    const menu = document.querySelector('.nav-mobile-menu');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      const open = btn.classList.toggle('open');
+      menu.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       initReveal();
       initFacts();
+      initMobileMenu();
     });
   } else {
     initReveal();
     initFacts();
+    initMobileMenu();
   }
 })();
 
