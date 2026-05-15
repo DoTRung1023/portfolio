@@ -1,7 +1,4 @@
 import fs from 'node:fs/promises';
-import { config } from 'dotenv';
-
-config({ debug: false });
 
 const ROOT_FACTS_PATH = new URL('../public/data/facts.json', import.meta.url);
 
