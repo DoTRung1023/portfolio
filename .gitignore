@@ -1,9 +1,13 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+**/.DS_Store
 
 # macOS metadata
 ._*
+
+# Environment
+.env
 
 # Node / tooling (if added later)
 node_modules/

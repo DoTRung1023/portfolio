@@ -85,17 +85,9 @@ function computeLeetCodeDailyStreak(submissionCalendar) {
 }
 
 function calculateDuolingoStreak() {
-  // Calculate days since November 22, 2023
   const startDate = new Date('2023-11-22');
-  const today = new Date();
-  
-  // Calculate difference in milliseconds and convert to days
-  const diffMs = today - startDate;
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
-  return {
-    duolingoStreak: diffDays
-  };
+  const diffMs = Date.now() - startDate.getTime();
+  return Math.floor(diffMs / (1000 * 60 * 60 * 24));
 }
 
 async function main() {
@@ -107,10 +99,9 @@ async function main() {
   }
 
   const leetcode = await fetchLeetCodeStats(LEETCODE_USERNAME);
-  const duolingo = calculateDuolingoStreak();
 
   const facts = {
-    duolingoStreak: `${duolingo.duolingoStreak} days`,
+    duolingoStreak: `${calculateDuolingoStreak()} days`,
     leetcodeDailyStreak: leetcode.leetcodeDailyStreak ?? '-',
     leetcodeSolved: leetcode.leetcodeSolved ?? '-',
     leetcodeEasy: leetcode.leetcodeEasy ?? '-',

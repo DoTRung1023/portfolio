@@ -15,7 +15,6 @@ const factsSnapshot = JSON.parse(readFileSync(FACTS_SNAPSHOT_URL, 'utf8'));
 
 const PORT = process.env.PORT || 3000;
 const LEETCODE_USERNAME = process.env.LEETCODE_USERNAME || '';
-const DUOLINGO_USERNAME = process.env.DUOLINGO_USERNAME || '';
 
 async function fetchJson(url, init) {
   const res = await fetch(url, init);
@@ -90,17 +89,10 @@ function computeLeetCodeDailyStreak(submissionCalendar) {
   return streak;
 }
 
-async function fetchDuolingoStreak(username) {
-  if (!username) return null;
-
-  try {
-    const url = `https://www.duome.eu/api/v1/users/${encodeURIComponent(username)}`;
-    const data = await fetchJson(url);
-    const streak = data?.streak;
-    return typeof streak === 'number' ? streak : null;
-  } catch {
-    return null;
-  }
+function calculateDuolingoStreak() {
+  const startDate = new Date('2023-11-22');
+  const diffMs = Date.now() - startDate.getTime();
+  return `${Math.floor(diffMs / (1000 * 60 * 60 * 24))} days`;
 }
 
 app.get('/api/facts', async (_req, res) => {
@@ -113,13 +105,10 @@ app.get('/api/facts', async (_req, res) => {
       // On Vercel the function bundle may not have `public/` on disk; imported snapshot still works.
     }
 
-    const [leetcode, duolingoStreak] = await Promise.all([
-      fetchLeetCodeSolved(LEETCODE_USERNAME),
-      fetchDuolingoStreak(DUOLINGO_USERNAME)
-    ]);
+    const leetcode = await fetchLeetCodeSolved(LEETCODE_USERNAME);
 
     res.json({
-      duolingoStreak: duolingoStreak ?? fileFacts.duolingoStreak ?? '-',
+      duolingoStreak: calculateDuolingoStreak(),
       leetcodeDailyStreak: leetcode?.streak ?? fileFacts.leetcodeDailyStreak ?? '-',
       leetcodeSolved: leetcode?.solved ?? fileFacts.leetcodeSolved ?? '-',
       leetcodeEasy: fileFacts.leetcodeEasy ?? '-',
@@ -129,7 +118,7 @@ app.get('/api/facts', async (_req, res) => {
     });
   } catch (err) {
     res.status(200).json({
-      duolingoStreak: '-',
+      duolingoStreak: calculateDuolingoStreak(),
       leetcodeDailyStreak: '-',
       leetcodeSolved: '-',
       leetcodeEasy: '-',
