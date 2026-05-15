@@ -14,76 +14,44 @@ async function fetchJson(url, init) {
 async function fetchLeetCodeStats(username) {
   if (!username) return {};
 
-  // Unofficial but widely used LeetCode GraphQL endpoint
-  const url = 'https://leetcode.com/graphql';
-  const query = `
-    query userProfile($username: String!) {
-      matchedUser(username: $username) {
-        submissionCalendar
-        submitStatsGlobal {
-          acSubmissionNum {
-            difficulty
-            count
-          }
-        }
-      }
-    }
-  `;
-
-  let data;
+  const base = `https://alfa-leetcode-api.onrender.com/${encodeURIComponent(username)}`;
   try {
-    data = await fetchJson(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ query, variables: { username } })
-    });
+    const [solved, calendar] = await Promise.all([
+      fetchJson(`${base}/solved`),
+      fetchJson(`${base}/calendar`)
+    ]);
+    return {
+      leetcodeSolved: solved?.solvedProblem ?? null,
+      leetcodeEasy: solved?.easySolved ?? null,
+      leetcodeMedium: solved?.mediumSolved ?? null,
+      leetcodeHard: solved?.hardSolved ?? null,
+      leetcodeDailyStreak: computeLeetCodeDailyStreak(calendar?.submissionCalendar)
+    };
   } catch (err) {
     console.warn('LeetCode API unavailable:', err.message);
     return {};
   }
-
-  const matchedUser = data?.data?.matchedUser;
-  const nums = matchedUser?.submitStatsGlobal?.acSubmissionNum ?? [];
-  const total = nums.find(x => x?.difficulty === 'All')?.count;
-  const easy = nums.find(x => x?.difficulty === 'Easy')?.count;
-  const medium = nums.find(x => x?.difficulty === 'Medium')?.count;
-  const hard = nums.find(x => x?.difficulty === 'Hard')?.count;
-
-  const leetcodeDailyStreak = computeLeetCodeDailyStreak(matchedUser?.submissionCalendar);
-  return {
-    leetcodeSolved: typeof total === 'number' ? total : null,
-    leetcodeEasy: typeof easy === 'number' ? easy : null,
-    leetcodeMedium: typeof medium === 'number' ? medium : null,
-    leetcodeHard: typeof hard === 'number' ? hard : null,
-    leetcodeDailyStreak
-  };
 }
 
-function utcMidnightSeconds(date = new Date()) {
-  return Math.floor(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) / 1000);
+function utcMidnightSeconds() {
+  const now = new Date();
+  return Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 1000);
 }
 
 function computeLeetCodeDailyStreak(submissionCalendar) {
   if (!submissionCalendar || typeof submissionCalendar !== 'string') return null;
-
   let cal;
-  try {
-    cal = JSON.parse(submissionCalendar);
-  } catch {
-    return null;
-  }
+  try { cal = JSON.parse(submissionCalendar); } catch { return null; }
 
-  const today = utcMidnightSeconds(new Date());
+  const today = utcMidnightSeconds();
   const oneDay = 86400;
   const start = cal[String(today)] ? today : today - oneDay;
 
   let streak = 0;
   for (let t = start; streak < 5000; t -= oneDay) {
-    const v = cal[String(t)];
-    if (!v) break;
-    streak += 1;
+    if (!cal[String(t)]) break;
+    streak++;
   }
-
   return streak;
 }
 
@@ -105,11 +73,11 @@ async function main() {
 
   const facts = {
     duolingoStreak: `${calculateDuolingoStreak()} days`,
-    leetcodeDailyStreak: leetcode.leetcodeDailyStreak ?? '-',
-    leetcodeSolved: leetcode.leetcodeSolved ?? '-',
-    leetcodeEasy: leetcode.leetcodeEasy ?? '-',
-    leetcodeMedium: leetcode.leetcodeMedium ?? '-',
-    leetcodeHard: leetcode.leetcodeHard ?? '-',
+    leetcodeDailyStreak: leetcode.leetcodeDailyStreak ?? existingFacts.leetcodeDailyStreak ?? '-',
+    leetcodeSolved: leetcode.leetcodeSolved ?? existingFacts.leetcodeSolved ?? '-',
+    leetcodeEasy: leetcode.leetcodeEasy ?? existingFacts.leetcodeEasy ?? '-',
+    leetcodeMedium: leetcode.leetcodeMedium ?? existingFacts.leetcodeMedium ?? '-',
+    leetcodeHard: leetcode.leetcodeHard ?? existingFacts.leetcodeHard ?? '-',
     updatedAt: new Date().toISOString()
   };
 
