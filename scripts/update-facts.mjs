@@ -30,11 +30,17 @@ async function fetchLeetCodeStats(username) {
     }
   `;
 
-  const data = await fetchJson(url, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ query, variables: { username } })
-  });
+  let data;
+  try {
+    data = await fetchJson(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ query, variables: { username } })
+    });
+  } catch (err) {
+    console.warn('LeetCode API unavailable:', err.message);
+    return {};
+  }
 
   const matchedUser = data?.data?.matchedUser;
   const nums = matchedUser?.submitStatsGlobal?.acSubmissionNum ?? [];
