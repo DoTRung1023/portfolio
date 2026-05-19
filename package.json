@@ -8,6 +8,6 @@
   "scripts": {
     "dev": "node src/server.mjs",
     "start": "node src/server.mjs",
-    "update:facts": "node scripts/update-facts.mjs 2>&1 | grep -v 'injected env'"
+    "update:facts": "node --env-file=.env scripts/update-facts.mjs 2>&1 | grep -v 'injected env'"
   }
 }
